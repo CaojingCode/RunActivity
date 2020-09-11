@@ -8,7 +8,7 @@ data class ApiResponse<T>(
     @SerializedName("errorMsg")
     var msg: String = "",
     @SerializedName("data")
-    var data: T?,
+    var data: T? =null,
     var state: AppState=AppState.LOADING
 )
 

@@ -5,13 +5,16 @@
     android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity"
+    android:background="@color/gray">
 
 
     <FrameLayout
         android:id="@+id/vpFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"/>
 
     <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/tabLayout"
@@ -20,13 +23,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:tl_iconHeight="23dp"
         app:tl_iconWidth="23dp"
-        app:tl_indicator_color="#2C97DE"
-        app:tl_indicator_height="0dp"
         app:tl_textSelectColor="#62cf76"
-        app:tl_textUnselectColor="#ffffff"
+        app:tl_textUnselectColor="@color/gray"
         app:tl_textsize="12sp"
-        app:tl_underline_color="#DDDDDD"
-        app:tl_underline_height="1dp"/>
+        android:background="@color/White"
+        app:tl_indicator_anim_enable="true"
+        android:elevation="3dp"
+        />
 
     <WebView
         android:id="@+id/webView"
@@ -34,20 +37,6 @@
         android:layout_height="match_parent"
         android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/tvMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/Black"
-        android:text="dhsuhdus"/>
 
-    <Button
-        android:id="@+id/btnJump"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="跳转到新的页面"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

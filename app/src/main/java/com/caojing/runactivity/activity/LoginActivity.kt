@@ -1,18 +1,18 @@
 package com.caojing.runactivity.activity
 
 import android.os.Bundle
-import com.caojing.runactivity.AppBaseActivity
+import com.blankj.utilcode.util.ActivityUtils
 import com.caojing.runactivity.R
-import com.tamsiree.rxui.activity.ActivityBase
+import com.jijia.kotlinlibrary.base.BaseActivity
 
-class LoginActivity :AppBaseActivity(){
+class LoginActivity : BaseActivity(){
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+    override fun layoutResID(): Int {
+        return R.layout.activity_login
     }
 
     override fun initView() {
+
     }
 
     override fun initData() {

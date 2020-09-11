@@ -1,5 +1,6 @@
 package com.jijia.kotlinlibrary.base
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.os.Build
@@ -11,6 +12,9 @@ import com.blankj.utilcode.util.UtilsTransActivity4MainProcess
 import com.jijia.kotlinlibrary.BuildConfig
 import com.jijia.kotlinlibrary.net.RetrofitManage
 import com.tamsiree.rxkit.RxTool
+import com.tamsiree.rxkit.crash.TCrashProfile
+import com.tamsiree.rxkit.crash.TCrashTool
+import com.tamsiree.rxui.view.dialog.RxDialogLoading
 import com.tencent.mmkv.MMKV
 import me.jessyan.autosize.AutoSize
 import me.jessyan.autosize.AutoSizeConfig

@@ -1,4 +1,3 @@
-include ':filemanagelibrary'
 include ':kotlinlibrary'
 rootProject.name='RunActivity'
 include ':app'

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvDrawTittle"
+        android:layout_width="280dp"
+        android:layout_height="75dp"
+        android:background="@color/Gray80_25"
+        android:gravity="center"
+        android:paddingTop="25dp"
+        android:text="文章文类"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMenuOne"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDrawTittle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMenuTwo"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:background="@color/Gray80_25"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintEnd_toEndOf="@+id/tvDrawTittle"
+        app:layout_constraintTop_toBottomOf="@+id/tvDrawTittle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

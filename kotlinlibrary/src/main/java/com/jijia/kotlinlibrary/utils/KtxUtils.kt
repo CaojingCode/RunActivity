@@ -8,18 +8,24 @@ import android.os.Build
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.flyco.tablayout.listener.CustomTabEntity
+import com.google.gson.reflect.TypeToken
 import com.jijia.kotlinlibrary.R
+import com.jijia.kotlinlibrary.base.AppLiveData
 import com.jijia.kotlinlibrary.entity.ApiResponse
+import com.jijia.kotlinlibrary.entity.AppState
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import com.tamsiree.rxkit.RxAppTool
 import com.tamsiree.rxui.view.dialog.RxDialogSureCancel
 import com.tencent.mmkv.MMKV
+import java.lang.reflect.Type
 
 
 fun Activity.fullScreen() {
@@ -45,6 +51,7 @@ val mmkv: MMKV
     get() {
         return MMKV.defaultMMKV()
     }
+
 
 /**
  * CustomTabEntity 集合数据
@@ -74,16 +81,6 @@ fun MutableList<CustomTabEntity>.addData(
     return this as ArrayList<CustomTabEntity>
 }
 
-/*数据解析扩展函数*/
-fun <T> ApiResponse<T>.getData(): T? {
-    return if (code == 2000) {
-        data
-    } else {
-        ToastUtils.showShort(msg)
-        null
-    }
-}
-
 
 @SuppressLint("WrongConstant")
 fun Context.permissionRequest(permission: String, block: () -> Unit) {
@@ -100,7 +97,7 @@ fun Context.permissionRequest(permission: String, block: () -> Unit) {
                     deniedForever: MutableList<String>,
                     denied: MutableList<String>
                 ) {
-                    ToastUtils.showLong(deniedForever.toString()+"\n"+denied.toString())
+                    ToastUtils.showLong(deniedForever.toString() + "\n" + denied.toString())
                     this@permissionRequest.commonDialog(
                         "需要使用到存储，相机，电话等相关权限，"
                                 + "\n请在设置-应用-${AppUtils.getAppName()}-权限中开启相关权限，" +
@@ -138,6 +135,45 @@ fun Context.loadingDialog(): QMUITipDialog {
     return QMUITipDialog.Builder(this)
         .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
         .create(false, R.style.tran_dialog)
+}
+
+fun <T> AppLiveData<ApiResponse<T>>.appObserve(
+    activity: AppCompatActivity,
+    onSuccess: (T) -> Unit,//接口返回成功
+    onError: () -> Unit = {},//接口返回失败，如果需要处理失败逻辑时，可以传人错误方法的逻辑
+    onEmpty: () -> Unit = {} //接口返回空数据 ，如果需要护理空数据逻辑，可以传人空数据方法的处理逻辑
+) {
+    this.observe(activity, Observer {
+        when (it.state) {
+            AppState.ERROR -> {
+                onError()
+            }
+            AppState.EMPTY -> {
+                onEmpty()
+            }
+            AppState.SUCCESS -> {
+                var data = it.data
+                if (data is List<*>) {
+                    if (data.size > 0) {
+                        onSuccess(data)
+//                        ToastUtils.showShort("返回不为空=集合")
+                    } else {
+                        onEmpty()
+//                        ToastUtils.showShort("返回数据为空=集合")
+                    }
+                } else {
+                    if (data != null) {
+                        onSuccess(data)
+//                        ToastUtils.showShort("返回不为空")
+                    }else{
+                        onEmpty()
+//                        ToastUtils.showShort("返回数据为空")
+                    }
+                }
+
+            }
+        }
+    })
 }
 
 
