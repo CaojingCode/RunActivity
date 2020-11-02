@@ -2,15 +2,13 @@ package com.jijia.kotlinlibrary.base
 
 import androidx.lifecycle.ViewModel
 import com.blankj.utilcode.util.GsonUtils
-import com.blankj.utilcode.util.LogUtils
-import com.google.gson.reflect.TypeToken
 import com.jijia.kotlinlibrary.entity.ApiResponse
 import com.jijia.kotlinlibrary.entity.AppState
 import com.jijia.kotlinlibrary.net.ApiService
 import com.jijia.kotlinlibrary.net.RetrofitManage
 import java.lang.reflect.Type
 
-open class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     private var baseUrl: String = "https://www.wanandroid.com/"
 
@@ -64,7 +62,7 @@ open class BaseViewModel : ViewModel() {
         if (!isSuccess) {
             apiResponse.state = AppState.ERROR
         } else {
-            if (apiResponse.code == 0) {
+            if (apiResponse.code == getSuccessCode()) {
                 if (apiResponse.data == null) {
                     apiResponse.state = AppState.EMPTY
                 } else {
@@ -75,5 +73,7 @@ open class BaseViewModel : ViewModel() {
             }
         }
     }
+
+    abstract fun getSuccessCode(): Int
 }
 

@@ -5,22 +5,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.constant.PermissionConstants
-import com.blankj.utilcode.util.ActivityUtils
-import com.blankj.utilcode.util.AppUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.caojing.runactivity.R
-import com.caojing.runactivity.entity.MenuData
 import com.caojing.runactivity.viewmodel.MainViewModel
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.jijia.kotlinlibrary.base.BaseActivity
-import com.jijia.kotlinlibrary.entity.AppState
-import com.jijia.kotlinlibrary.utils.appObserve
 import com.jijia.kotlinlibrary.utils.mmkv
 import com.jijia.kotlinlibrary.utils.permissionRequest
-import com.qmuiteam.qmui.widget.tab.QMUIBasicTabSegment
-import com.qmuiteam.qmui.widget.tab.QMUITabSegment2
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.ArrayList
+import java.util.*
 
 class MainActivity : BaseActivity() {
     private var currentTab = 0

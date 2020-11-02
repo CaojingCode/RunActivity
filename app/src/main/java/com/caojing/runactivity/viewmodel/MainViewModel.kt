@@ -120,4 +120,8 @@ class MainViewModel() : BaseViewModel() {
         }
     }
 
+    override fun getSuccessCode(): Int {
+        return 0
+    }
+
 }

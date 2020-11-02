@@ -67,4 +67,8 @@ class ArticleListViewModel : BaseViewModel() {
         getTopArticleData(cid)
     }
 
+    override fun getSuccessCode(): Int {
+        return 0
+    }
+
 }
